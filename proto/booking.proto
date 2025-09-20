@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+package booking;
+
+service BookingService {
+  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc Logout(LogoutRequest) returns (LogoutResponse);
+  rpc GetAvailability(GetAvailabilityRequest) returns (GetAvailabilityResponse);
+  rpc BookSeat(BookSeatRequest) returns (BookSeatResponse);
+}
+
+// User Authentication Messages
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  enum Status {
+    SUCCESS = 0;
+    INVALID_CREDENTIALS = 1;
+  }
+  Status status = 1;
+  optional string token = 2;
+}
+
+message LogoutRequest {
+  string token = 1;
+}
+
+message LogoutResponse {
+  enum Status {
+    SUCCESS = 0;
+    INVALID_TOKEN = 1;
+  }
+  Status status = 1;
+}
+
+// Seat Management Messages
+message GetAvailabilityRequest {
+  string token = 1;
+  string movie_title = 2;
+  string showtime = 3;
+}
+
+message Seat {
+  string seat_id = 1;
+  bool is_available = 2;
+}
+
+message GetAvailabilityResponse {
+  enum Status {
+    SUCCESS = 0;
+    UNAUTHORIZED = 1;
+    SHOWTIME_NOT_FOUND = 2;
+  }
+  Status status = 1;
+  repeated Seat seats = 2;
+}
+
+message BookSeatRequest {
+  string token = 1;
+  string movie_title = 2;
+  string showtime = 3;
+  repeated string seat_ids = 4;
+}
+
+message BookSeatResponse {
+  enum Status {
+    SUCCESS = 0;
+    UNAUTHORIZED = 1;
+    SEAT_UNAVAILABLE = 2;
+    ALREADY_BOOKED = 3;
+    PAYMENT_FAILED = 4;
+  }
+  Status status = 1;
+  optional string booking_id = 2;
+}
