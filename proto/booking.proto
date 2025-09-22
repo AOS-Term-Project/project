@@ -39,7 +39,7 @@ message LogoutResponse {
 // Seat Management Messages
 message GetAvailabilityRequest {
   string token = 1;
-  string movie_title = 2;
+  string movie_id = 2;
   string showtime = 3;
 }
 
@@ -60,7 +60,7 @@ message GetAvailabilityResponse {
 
 message BookSeatRequest {
   string token = 1;
-  string movie_title = 2;
+  string movie_id = 2;
   string showtime = 3;
   repeated string seat_ids = 4;
 }
