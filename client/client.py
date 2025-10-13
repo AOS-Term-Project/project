@@ -34,11 +34,11 @@ def run():
     username = None
     
     faq_questions = {
-        "1": "How to cancel a booking?",
-        "2": "What seats are available?",
-        "3": "What payment methods are accepted?",
-        "4": "What is the refund policy?",
-        "5": "What is the duration of the movie?"
+        "1": "What seats are available?",
+        "2": "What payment methods are accepted?",
+        "3": "What is the refund policy?",
+        "4": "What are the timings of the movie?",
+        "5": "How to cancel a booking?"
     }
 
     while True:
