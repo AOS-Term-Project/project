@@ -18,5 +18,7 @@ run _python client.py_
 //LLM Server started on port 50052
 
 when client runs , it will display the following options:
+
+
 <img width="346" height="194" alt="image" src="https://github.com/user-attachments/assets/38d9447c-d143-401b-ae1e-890863e0df99" />
 
