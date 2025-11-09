@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rbooking.proto\x12\x07\x62ooking\"2\n\x0cLoginRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\"\x8c\x01\n\rLoginResponse\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.booking.LoginResponse.Status\x12\x12\n\x05token\x18\x02 \x01(\tH\x00\x88\x01\x01\".\n\x06Status\x12\x0b\n\x07SUCCESS\x10\x00\x12\x17\n\x13INVALID_CREDENTIALS\x10\x01\x42\x08\n\x06_token\"\x1e\n\rLogoutRequest\x12\r\n\x05token\x18\x01 \x01(\t\"j\n\x0eLogoutResponse\x12.\n\x06status\x18\x01 \x01(\x0e\x32\x1e.booking.LogoutResponse.Status\"(\n\x06Status\x12\x0b\n\x07SUCCESS\x10\x00\x12\x11\n\rINVALID_TOKEN\x10\x01\"K\n\x16GetAvailabilityRequest\x12\r\n\x05token\x18\x01 \x01(\t\x12\x10\n\x08movie_id\x18\x02 \x01(\t\x12\x10\n\x08showtime\x18\x03 \x01(\t\"-\n\x04Seat\x12\x0f\n\x07seat_id\x18\x01 \x01(\t\x12\x14\n\x0cis_available\x18\x02 \x01(\x08\"\xb1\x01\n\x17GetAvailabilityResponse\x12\x37\n\x06status\x18\x01 \x01(\x0e\x32\'.booking.GetAvailabilityResponse.Status\x12\x1c\n\x05seats\x18\x02 \x03(\x0b\x32\r.booking.Seat\"?\n\x06Status\x12\x0b\n\x07SUCCESS\x10\x00\x12\x10\n\x0cUNAUTHORIZED\x10\x01\x12\x16\n\x12SHOWTIME_NOT_FOUND\x10\x02\"V\n\x0f\x42ookSeatRequest\x12\r\n\x05token\x18\x01 \x01(\t\x12\x10\n\x08movie_id\x18\x02 \x01(\t\x12\x10\n\x08showtime\x18\x03 \x01(\t\x12\x10\n\x08seat_ids\x18\x04 \x03(\t\"\xd3\x01\n\x10\x42ookSeatResponse\x12\x30\n\x06status\x18\x01 \x01(\x0e\x32 .booking.BookSeatResponse.Status\x12\x17\n\nbooking_id\x18\x02 \x01(\tH\x00\x88\x01\x01\"e\n\x06Status\x12\x0b\n\x07SUCCESS\x10\x00\x12\x10\n\x0cUNAUTHORIZED\x10\x01\x12\x14\n\x10SEAT_UNAVAILABLE\x10\x02\x12\x12\n\x0e\x41LREADY_BOOKED\x10\x03\x12\x12\n\x0ePAYMENT_FAILED\x10\x04\x42\r\n\x0b_booking_id2\x9a\x02\n\x0e\x42ookingService\x12\x36\n\x05Login\x12\x15.booking.LoginRequest\x1a\x16.booking.LoginResponse\x12\x39\n\x06Logout\x12\x16.booking.LogoutRequest\x1a\x17.booking.LogoutResponse\x12T\n\x0fGetAvailability\x12\x1f.booking.GetAvailabilityRequest\x1a .booking.GetAvailabilityResponse\x12?\n\x08\x42ookSeat\x12\x18.booking.BookSeatRequest\x1a\x19.booking.BookSeatResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rbooking.proto\x12\x07\x62ooking\"2\n\x0cLoginRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\"\xa2\x01\n\rLoginResponse\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.booking.LoginResponse.Status\x12\r\n\x05token\x18\x02 \x01(\t\x12\x13\n\x0bleader_hint\x18\x03 \x01(\t\">\n\x06Status\x12\x0b\n\x07SUCCESS\x10\x00\x12\x17\n\x13INVALID_CREDENTIALS\x10\x01\x12\x0e\n\nNOT_LEADER\x10\x02\"\x1e\n\rLogoutRequest\x12\r\n\x05token\x18\x01 \x01(\t\"z\n\x0eLogoutResponse\x12.\n\x06status\x18\x01 \x01(\x0e\x32\x1e.booking.LogoutResponse.Status\"8\n\x06Status\x12\x0b\n\x07SUCCESS\x10\x00\x12\x11\n\rINVALID_TOKEN\x10\x01\x12\x0e\n\nNOT_LEADER\x10\x02\"K\n\x16GetAvailabilityRequest\x12\r\n\x05token\x18\x01 \x01(\t\x12\x10\n\x08movie_id\x18\x02 \x01(\t\x12\x10\n\x08showtime\x18\x03 \x01(\t\"-\n\x04Seat\x12\x0f\n\x07seat_id\x18\x01 \x01(\t\x12\x14\n\x0cis_available\x18\x02 \x01(\x08\"\xd6\x01\n\x17GetAvailabilityResponse\x12\x37\n\x06status\x18\x01 \x01(\x0e\x32\'.booking.GetAvailabilityResponse.Status\x12\x1c\n\x05seats\x18\x02 \x03(\x0b\x32\r.booking.Seat\x12\x13\n\x0bleader_hint\x18\x03 \x01(\t\"O\n\x06Status\x12\x0b\n\x07SUCCESS\x10\x00\x12\x10\n\x0cUNAUTHORIZED\x10\x01\x12\x16\n\x12SHOWTIME_NOT_FOUND\x10\x02\x12\x0e\n\nNOT_LEADER\x10\x03\"V\n\x0f\x42ookSeatRequest\x12\r\n\x05token\x18\x01 \x01(\t\x12\x10\n\x08movie_id\x18\x02 \x01(\t\x12\x10\n\x08showtime\x18\x03 \x01(\t\x12\x10\n\x08seat_ids\x18\x04 \x03(\t\"\xf8\x01\n\x10\x42ookSeatResponse\x12\x30\n\x06status\x18\x01 \x01(\x0e\x32 .booking.BookSeatResponse.Status\x12\x17\n\nbooking_id\x18\x02 \x01(\tH\x00\x88\x01\x01\x12\x13\n\x0bleader_hint\x18\x03 \x01(\t\"u\n\x06Status\x12\x0b\n\x07SUCCESS\x10\x00\x12\x10\n\x0cUNAUTHORIZED\x10\x01\x12\x14\n\x10SEAT_UNAVAILABLE\x10\x02\x12\x12\n\x0e\x41LREADY_BOOKED\x10\x03\x12\x12\n\x0ePAYMENT_FAILED\x10\x04\x12\x0e\n\nNOT_LEADER\x10\x05\x42\r\n\x0b_booking_id\"A\n\x0e\x43hatbotRequest\x12\r\n\x05token\x18\x01 \x01(\t\x12\x0f\n\x07payload\x18\x02 \x01(\t\x12\x0f\n\x07\x63ontext\x18\x03 \x01(\t\"\xa0\x01\n\x0f\x43hatbotResponse\x12/\n\x06status\x18\x01 \x01(\x0e\x32\x1f.booking.ChatbotResponse.Status\x12\x0e\n\x06\x61nswer\x18\x02 \x01(\t\x12\x13\n\x0bleader_hint\x18\x03 \x01(\t\"7\n\x06Status\x12\x0b\n\x07SUCCESS\x10\x00\x12\x10\n\x0cUNAUTHORIZED\x10\x01\x12\x0e\n\nNOT_LEADER\x10\x02\x32\xdb\x02\n\x0e\x42ookingService\x12\x36\n\x05Login\x12\x15.booking.LoginRequest\x1a\x16.booking.LoginResponse\x12\x39\n\x06Logout\x12\x16.booking.LogoutRequest\x1a\x17.booking.LogoutResponse\x12T\n\x0fGetAvailability\x12\x1f.booking.GetAvailabilityRequest\x1a .booking.GetAvailabilityResponse\x12?\n\x08\x42ookSeat\x12\x18.booking.BookSeatRequest\x1a\x19.booking.BookSeatResponse\x12?\n\nAskChatbot\x12\x17.booking.ChatbotRequest\x1a\x18.booking.ChatbotResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -34,29 +34,35 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_LOGINREQUEST']._serialized_start=26
   _globals['_LOGINREQUEST']._serialized_end=76
   _globals['_LOGINRESPONSE']._serialized_start=79
-  _globals['_LOGINRESPONSE']._serialized_end=219
-  _globals['_LOGINRESPONSE_STATUS']._serialized_start=163
-  _globals['_LOGINRESPONSE_STATUS']._serialized_end=209
-  _globals['_LOGOUTREQUEST']._serialized_start=221
-  _globals['_LOGOUTREQUEST']._serialized_end=251
-  _globals['_LOGOUTRESPONSE']._serialized_start=253
-  _globals['_LOGOUTRESPONSE']._serialized_end=359
-  _globals['_LOGOUTRESPONSE_STATUS']._serialized_start=319
-  _globals['_LOGOUTRESPONSE_STATUS']._serialized_end=359
-  _globals['_GETAVAILABILITYREQUEST']._serialized_start=361
-  _globals['_GETAVAILABILITYREQUEST']._serialized_end=436
-  _globals['_SEAT']._serialized_start=438
-  _globals['_SEAT']._serialized_end=483
-  _globals['_GETAVAILABILITYRESPONSE']._serialized_start=486
-  _globals['_GETAVAILABILITYRESPONSE']._serialized_end=663
-  _globals['_GETAVAILABILITYRESPONSE_STATUS']._serialized_start=600
-  _globals['_GETAVAILABILITYRESPONSE_STATUS']._serialized_end=663
-  _globals['_BOOKSEATREQUEST']._serialized_start=665
-  _globals['_BOOKSEATREQUEST']._serialized_end=751
-  _globals['_BOOKSEATRESPONSE']._serialized_start=754
-  _globals['_BOOKSEATRESPONSE']._serialized_end=965
-  _globals['_BOOKSEATRESPONSE_STATUS']._serialized_start=849
-  _globals['_BOOKSEATRESPONSE_STATUS']._serialized_end=950
-  _globals['_BOOKINGSERVICE']._serialized_start=968
-  _globals['_BOOKINGSERVICE']._serialized_end=1250
+  _globals['_LOGINRESPONSE']._serialized_end=241
+  _globals['_LOGINRESPONSE_STATUS']._serialized_start=179
+  _globals['_LOGINRESPONSE_STATUS']._serialized_end=241
+  _globals['_LOGOUTREQUEST']._serialized_start=243
+  _globals['_LOGOUTREQUEST']._serialized_end=273
+  _globals['_LOGOUTRESPONSE']._serialized_start=275
+  _globals['_LOGOUTRESPONSE']._serialized_end=397
+  _globals['_LOGOUTRESPONSE_STATUS']._serialized_start=341
+  _globals['_LOGOUTRESPONSE_STATUS']._serialized_end=397
+  _globals['_GETAVAILABILITYREQUEST']._serialized_start=399
+  _globals['_GETAVAILABILITYREQUEST']._serialized_end=474
+  _globals['_SEAT']._serialized_start=476
+  _globals['_SEAT']._serialized_end=521
+  _globals['_GETAVAILABILITYRESPONSE']._serialized_start=524
+  _globals['_GETAVAILABILITYRESPONSE']._serialized_end=738
+  _globals['_GETAVAILABILITYRESPONSE_STATUS']._serialized_start=659
+  _globals['_GETAVAILABILITYRESPONSE_STATUS']._serialized_end=738
+  _globals['_BOOKSEATREQUEST']._serialized_start=740
+  _globals['_BOOKSEATREQUEST']._serialized_end=826
+  _globals['_BOOKSEATRESPONSE']._serialized_start=829
+  _globals['_BOOKSEATRESPONSE']._serialized_end=1077
+  _globals['_BOOKSEATRESPONSE_STATUS']._serialized_start=945
+  _globals['_BOOKSEATRESPONSE_STATUS']._serialized_end=1062
+  _globals['_CHATBOTREQUEST']._serialized_start=1079
+  _globals['_CHATBOTREQUEST']._serialized_end=1144
+  _globals['_CHATBOTRESPONSE']._serialized_start=1147
+  _globals['_CHATBOTRESPONSE']._serialized_end=1307
+  _globals['_CHATBOTRESPONSE_STATUS']._serialized_start=1252
+  _globals['_CHATBOTRESPONSE_STATUS']._serialized_end=1307
+  _globals['_BOOKINGSERVICE']._serialized_start=1310
+  _globals['_BOOKINGSERVICE']._serialized_end=1657
 # @@protoc_insertion_point(module_scope)

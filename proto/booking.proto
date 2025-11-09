@@ -2,13 +2,6 @@ syntax = "proto3";
 
 package booking;
 
-service BookingService {
-  rpc Login(LoginRequest) returns (LoginResponse);
-  rpc Logout(LogoutRequest) returns (LogoutResponse);
-  rpc GetAvailability(GetAvailabilityRequest) returns (GetAvailabilityResponse);
-  rpc BookSeat(BookSeatRequest) returns (BookSeatResponse);
-}
-
 // User Authentication Messages
 message LoginRequest {
   string username = 1;
@@ -19,9 +12,11 @@ message LoginResponse {
   enum Status {
     SUCCESS = 0;
     INVALID_CREDENTIALS = 1;
+    NOT_LEADER = 2; //client must retry
   }
   Status status = 1;
-  optional string token = 2;
+  string token = 2;
+  string leader_hint = 3;
 }
 
 message LogoutRequest {
@@ -32,6 +27,7 @@ message LogoutResponse {
   enum Status {
     SUCCESS = 0;
     INVALID_TOKEN = 1;
+    NOT_LEADER = 2;
   }
   Status status = 1;
 }
@@ -53,9 +49,11 @@ message GetAvailabilityResponse {
     SUCCESS = 0;
     UNAUTHORIZED = 1;
     SHOWTIME_NOT_FOUND = 2;
+    NOT_LEADER = 3;
   }
   Status status = 1;
   repeated Seat seats = 2;
+  string leader_hint = 3;
 }
 
 message BookSeatRequest {
@@ -72,7 +70,36 @@ message BookSeatResponse {
     SEAT_UNAVAILABLE = 2;
     ALREADY_BOOKED = 3;
     PAYMENT_FAILED = 4;
+    NOT_LEADER = 5;
   }
   Status status = 1;
   optional string booking_id = 2;
+  string leader_hint = 3;
+}
+
+// --- Business Logic / LLM Proxy Messages ---
+message ChatbotRequest {
+  string token = 1;
+  string payload = 2; // The user's query
+  string context = 3; // Any extra context
+}
+
+message ChatbotResponse {
+  enum Status {
+    SUCCESS = 0;
+    UNAUTHORIZED = 1;
+    NOT_LEADER = 2; // This request must also go to the leader
+  }
+  Status status = 1;
+  string answer = 2;
+  string leader_hint = 3;
+}
+
+
+service BookingService {
+  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc Logout(LogoutRequest) returns (LogoutResponse);
+  rpc GetAvailability(GetAvailabilityRequest) returns (GetAvailabilityResponse);
+  rpc BookSeat(BookSeatRequest) returns (BookSeatResponse);
+  rpc AskChatbot(ChatbotRequest) returns (ChatbotResponse);
 }

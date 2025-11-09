@@ -54,6 +54,11 @@ class BookingServiceStub(object):
                 request_serializer=booking__pb2.BookSeatRequest.SerializeToString,
                 response_deserializer=booking__pb2.BookSeatResponse.FromString,
                 _registered_method=True)
+        self.AskChatbot = channel.unary_unary(
+                '/booking.BookingService/AskChatbot',
+                request_serializer=booking__pb2.ChatbotRequest.SerializeToString,
+                response_deserializer=booking__pb2.ChatbotResponse.FromString,
+                _registered_method=True)
 
 
 class BookingServiceServicer(object):
@@ -83,6 +88,12 @@ class BookingServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def AskChatbot(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_BookingServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -105,6 +116,11 @@ def add_BookingServiceServicer_to_server(servicer, server):
                     servicer.BookSeat,
                     request_deserializer=booking__pb2.BookSeatRequest.FromString,
                     response_serializer=booking__pb2.BookSeatResponse.SerializeToString,
+            ),
+            'AskChatbot': grpc.unary_unary_rpc_method_handler(
+                    servicer.AskChatbot,
+                    request_deserializer=booking__pb2.ChatbotRequest.FromString,
+                    response_serializer=booking__pb2.ChatbotResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -215,6 +231,33 @@ class BookingService(object):
             '/booking.BookingService/BookSeat',
             booking__pb2.BookSeatRequest.SerializeToString,
             booking__pb2.BookSeatResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def AskChatbot(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/booking.BookingService/AskChatbot',
+            booking__pb2.ChatbotRequest.SerializeToString,
+            booking__pb2.ChatbotResponse.FromString,
             options,
             channel_credentials,
             insecure,

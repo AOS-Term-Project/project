@@ -22,11 +22,46 @@ class LLMServiceServicer(llm_pb2_grpc.LLMServiceServicer):
         }
 
     def GetLLMAnswer(self, request, context):
-        print(f"Received query ID: '{request.query}'")
+        print(f"Received query: '{request.query}'")
+        print(f"With context: '{request.context}'")
         
-        answer = self.faqs.get(request.query, "I'm sorry, I don't have an answer for that question. Please choose from the available options.")
+        # --- New Context-Aware Logic ---
+        
+        # 1. Check for context-aware answer first.
+        #    If context was provided, use it.
+        if request.context:
+            if "booking" in request.query.lower() or "my seat" in request.query.lower():
+                answer = f"I've checked your account. {request.context}"
+                return llm_pb2.GetLLMAnswerResponse(answer=answer)
+            
+            if "available" in request.query.lower():
+                answer = f"I found some availability in the system: {request.context}"
+                return llm_pb2.GetLLMAnswerResponse(answer=answer)
+        
+        # 2. No context. Check if the query is an FAQ ID (like "1", "2").
+        if request.query in self.faqs:
+            answer = self.faqs[request.query]
+            return llm_pb2.GetLLMAnswerResponse(answer=answer)
+
+        # 3. No ID. Check for keywords (for natural language general questions).
+        query_lower = request.query.lower()
+        if "cancel" in query_lower:
+            faq_id = "5"
+        elif "payment" in query_lower:
+            faq_id = "2"
+        elif "refund" in query_lower:
+            faq_id = "3"
+        elif "timing" in query_lower:
+            faq_id = "4"
+        elif "available" in query_lower or "seat" in query_lower:
+            faq_id = "1"
+        else:
+            faq_id = "unknown" # Fallback
+
+        answer = self.faqs.get(faq_id, "I'm sorry, I don't have an answer for that. Can you rephrase?")
         
         return llm_pb2.GetLLMAnswerResponse(answer=answer)
+        
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
