@@ -7,7 +7,7 @@ pip3 install grpcio-tools
 
 **STEPS TO RUN**
 **Clear the old logs-** Delete the old json and jsonl files
-rm *.json *.jsonl
+run _rm *.json *.jsonl_
 
 **Terminal 1-** LLM Server
 run _python3 llm_server.py_
