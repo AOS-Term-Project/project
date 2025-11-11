@@ -25,20 +25,23 @@ from raft_log import PersistentLog
 # On first boot, the leader will apply this to its state machine.
 def get_initial_state():
     return {
-        "users": {"user1": "pass123"},
+        "users": {
+            "user1": "pass123",
+            "user2": "mango07",
+            "user3": "dot987"},
         "tokens": {}, # All tokens are ephemeral
         "movies": {
             "1": {
                 "title": "Shawshank Redemption",
                 "showtimes": {
-                    "10:00AM": { "seats": { "A1": True, "A2": True, "B1": False, "B2": True } },
+                    "10:00AM": { "seats": { "A1": True, "A2": True, "B1": True, "B2": True } },
                     "1:00PM":  { "seats": { "C1": True, "C2": True } }
                 }
             },
             "2": {
                 "title": "Star Wars: A New Hope",
                 "showtimes": {
-                    "11:30AM": { "seats": { "A1": True, "A2": True, "A3": False, "A4": True, "B1": True } },
+                    "11:30AM": { "seats": { "A1": True, "A2": True, "A3": True, "A4": True, "B1": True } },
                     "4:00PM":  { "seats": { "D1": True, "D2": True, "D3": True } }
                 }
             },
@@ -46,7 +49,20 @@ def get_initial_state():
                 "title": "Mission: Impossible - Fallout",
                 "showtimes": {
                     "2:30PM": { "seats": { "E1": True, "E2": True } },
-                    "7:30PM": { "seats": { "F1": True, "F2": False } }
+                    "7:30PM": { "seats": { "F1": True, "F2": True } }
+                }
+            },
+            "4": {
+                "title": "The Dark Knight",
+                "showtimes": {
+                    "9:00PM": { "seats": { "G1": True, "G2": True, "G3": True } }
+                }
+            },
+            "5": {
+                "title": "The Godfather",
+                "showtimes": {
+                    "5:00PM": { "seats": { "B3": True, "B4": True, "B5": True}},
+                    "8:30PM": { "seats": { "F5": True, "F6": True, "F7": True}}
                 }
             }
         }

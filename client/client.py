@@ -123,6 +123,8 @@ class BookingClient:
             "1": {"title": "Shawshank Redemption", "showtimes": ["10:00AM", "1:00PM"]},
             "2": {"title": "Star Wars: A New Hope", "showtimes": ["11:30AM", "4:00PM"]},
             "3": {"title": "Mission: Impossible - Fallout", "showtimes": ["2:30PM", "7:30PM"]},
+            "4": {"title": "The Dark Knight", "showtimes": ["9:00PM"]},
+            "5": {"title": "The Godfather", "showtimes": ["5:00PM", "8:30PM"]}
         }
         print("\n--- Available Movies and Showtimes ---")
         for movie_id, data in movies_info.items():
@@ -222,9 +224,9 @@ class BookingClient:
             print("\n--- Distributed Ticket Booking System---")
             print("\n")
             print("1. Login")
-            print("2. Get seat availability")
-            print("3. Book seat")
-            print("4. Ask chatbot")
+            print("2. Check seat availability")
+            print("3. Book a seat")
+            print("4. Ask the chatbot")
             print("5. Logout")
             print("6. Exit")
             
