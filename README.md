@@ -20,7 +20,7 @@ run _python3 app_server/app_server.py 50053 50053 localhost:50051 localhost:5005
 run _python3 app_server/app_server.py 50054 50054 localhost:50051 localhost:50053_
 
 **Terminal 5-** Client
-run _python client.py_
+run _python3 client.py_
 
 Application Server started on port 50051, 50053, 50054.
 
