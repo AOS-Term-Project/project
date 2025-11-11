@@ -7,18 +7,24 @@ pip3 install grpcio-tools
 
 **START THE SERVERS**
 
-**Terminal 1-** App Server
-run _python app_server.py_
+**Terminal 1-** LLM Server
+run _python3 llm_server.py_
 
-**Terminal 2-** llm Server
-run _python llm_server.py_
+**Terminal 2-** App Server 1
+run _python3 app_server/app_server.py 50051 50051 localhost:50053 localhost:50054_
 
-**Terminal 3-** Client
+**Terminal 3-** App Server 2
+run _python3 app_server/app_server.py 50053 50053 localhost:50051 localhost:50054_
+
+**Terminal 4-** App Server 3
+run _python3 app_server/app_server.py 50054 50054 localhost:50051 localhost:50053_
+
+**Terminal 5-** Client
 run _python client.py_
 
-Application Server started on port 50051
+Application Server started on port 50051, 50053, 50054.
 
-LLM Server started on port 50052
+LLM Server started on port 50052.
 
 when client runs , it will display the following options:
 
