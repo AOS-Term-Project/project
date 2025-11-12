@@ -262,9 +262,9 @@ class UnifiedServer(raft_pb2_grpc.RaftServicer, booking_pb2_grpc.BookingServiceS
                 for movie_id, movie_data in self.state_machine["movies"].items():
                     movie_title = movie_data["title"]
                     for showtime, showtime_data in movie_data["showtimes"].items():
-                        for seat_id, is_available in showtime_data["seats"].items():
-                            booked_by_user = showtime_data["seats"].get(seat_id)
-                            if booked_by_user == user_id:
+                        for seat_id, seat_value in showtime_data["seats"].items():
+                            #booked_by_user = showtime_data["seats"].get(seat_id)
+                            if seat_value == user_id:
                                 my_bookings.append(f"{seat_id} for '{movie_title}' at {showtime}")
                 
                 if my_bookings:
@@ -278,8 +278,8 @@ class UnifiedServer(raft_pb2_grpc.RaftServicer, booking_pb2_grpc.BookingServiceS
                 # Just find the first 5 available seats as an example
                 for movie_id, movie_data in self.state_machine["movies"].items():
                     for showtime, showtime_data in movie_data["showtimes"].items():
-                        for seat_id, is_available in showtime_data["seats"].items():
-                            if is_available:
+                        for seat_id, seat_value in showtime_data["seats"].items():
+                            if seat_value == True:
                                 available_seats.append(f"{seat_id} for '{movie_data['title']}' at {showtime}")
                                 if len(available_seats) >= 5:
                                     break
@@ -354,10 +354,13 @@ class UnifiedServer(raft_pb2_grpc.RaftServicer, booking_pb2_grpc.BookingServiceS
             if not showtime_data:
                 return booking_pb2.GetAvailabilityResponse(status=booking_pb2.GetAvailabilityResponse.Status.SHOWTIME_NOT_FOUND)
 
-            seats_list = [
-                booking_pb2.Seat(seat_id=seat_id, is_available=is_avail)
-                for seat_id, is_avail in showtime_data["seats"].items()
-            ]
+            seats_list = []
+            for seat_id, is_avail in showtime_data["seats"].items():
+                is_seat_available = (is_avail == True)
+                seats_list.append(
+                    booking_pb2.Seat(seat_id=seat_id, is_available=is_seat_available)
+                )
+
             return booking_pb2.GetAvailabilityResponse(status=booking_pb2.GetAvailabilityResponse.Status.SUCCESS, seats=seats_list, leader_hint=self.address)
 
     def BookSeat(self, request, context):
