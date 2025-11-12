@@ -1,4 +1,0 @@
-{"term": 1, "command": "LOGIN 493f727b-82d7-4ec4-8e24-6ea158d4369a user1"}
-{"term": 1, "command": "BOOK 1 10:00AM user1 A2"}
-{"term": 1, "command": "LOGOUT 493f727b-82d7-4ec4-8e24-6ea158d4369a"}
-{"term": 1, "command": "LOGIN c7bc832e-9da3-4b68-b338-137de67ad2d0 user1"}
